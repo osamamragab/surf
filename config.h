@@ -128,6 +128,12 @@ static SiteSpecific certs[] = {
 	{ "://suckless\\.org/", "suckless.org.crt" },
 };
 
+#define SR_SEARCH {\
+	.v = (char *[]){ "/bin/sh", "-c", \
+	"xprop -id $0 -f _SURF_GO 8s -set _SURF_GO \
+	$(sr -p $(sr -elvi | tail -n +2 | cut -s -f1 | dmenu))", winid, NULL } \
+}
+
 #define MODKEY GDK_CONTROL_MASK
 
 /* hotkeys */
@@ -187,6 +193,8 @@ static Key keys[] = {
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_b,      toggle,     { .i = ScrollBars } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_t,      toggle,     { .i = StrictTLS } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_m,      toggle,     { .i = Style } },
+
+	{ MODKEY,                GDK_KEY_s,      spawn,      SR_SEARCH },
 };
 
 /* button definitions */
