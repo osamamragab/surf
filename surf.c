@@ -1194,8 +1194,8 @@ newview(Client *c, WebKitWebView *rv)
 
 		g_signal_connect(G_OBJECT(context), "download-started",
 		                 G_CALLBACK(downloadstarted), c);
-		g_signal_connect(G_OBJECT(context), "initialize-web-extensions",
-		                 G_CALLBACK(initwebextensions), c);
+		/*g_signal_connect(G_OBJECT(context), "initialize-web-extensions",
+		                 G_CALLBACK(initwebextensions), c);*/
 
 		v = g_object_new(WEBKIT_TYPE_WEB_VIEW,
 		    "settings", settings,
