@@ -159,17 +159,17 @@ static Key keys[] = {
 	/* vertical and horizontal scrolling, in viewport percentage */
 	{ 0,                     GDK_KEY_j,      scrollv,    { .i = +10 } },
 	{ 0,                     GDK_KEY_k,      scrollv,    { .i = -10 } },
-	{ MODKEY,                GDK_KEY_space,  scrollv,    { .i = +50 } },
-	{ MODKEY,                GDK_KEY_b,      scrollv,    { .i = -50 } },
-	{ MODKEY,                GDK_KEY_i,      scrollh,    { .i = +10 } },
-	{ MODKEY,                GDK_KEY_u,      scrollh,    { .i = -10 } },
+	{ GDK_SHIFT_MASK,        GDK_KEY_j,      scrollv,    { .i = +50 } },
+	{ GDK_SHIFT_MASK,        GDK_KEY_k,      scrollv,    { .i = -50 } },
+	{ 0,                     GDK_KEY_j,      scrollh,    { .i = +10 } },
+	{ 0,                     GDK_KEY_k,      scrollh,    { .i = -10 } },
 
 
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_j,      zoom,       { .i = -1 } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_k,      zoom,       { .i = +1 } },
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_q,      zoom,       { .i = 0  } },
 	{ MODKEY,                GDK_KEY_minus,  zoom,       { .i = -1 } },
-	{ MODKEY,                GDK_KEY_plus,   zoom,       { .i = +1 } },
+	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_plus,   zoom,       { .i = +1 } },
+	{ MODKEY,                GDK_KEY_equal,  zoom,       { .i = 0  } },
 
 	{ MODKEY,                GDK_KEY_p,      clipboard,  { .i = 1 } },
 	{ MODKEY,                GDK_KEY_y,      clipboard,  { .i = 0 } },
