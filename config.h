@@ -7,6 +7,7 @@ static char *styledir       = "~/.config/surf/styles/";
 static char *certdir        = "~/.config/surf/certificates/";
 static char *cachedir       = "~/.config/surf/cache/";
 static char *cookiefile     = "~/.config/surf/cookies.txt";
+static char *historyfile    = "~/.config/surf/history.txt";
 static char **plugindirs    = (char*[]){
 	"~/.config/surf/plugins/",
 	LIBPREFIX "/mozilla/plugins/",
@@ -86,6 +87,14 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
         } \
 }
 
+#define SETURI(p) { \
+        .v = (char *[]){ "/bin/sh", "-c", \
+             "prop=\"`surf_history_dmenu.sh`\" &&" \
+             "xprop -id $1 -f $0 8s -set $0 \"$prop\"", \
+             p, winid, NULL \
+        } \
+}
+
 /* DOWNLOAD(URI, referer) */
 #define DOWNLOAD(u, r) { \
         .v = (const char *[]){ "st", "-e", "/bin/sh", "-c",\
@@ -160,6 +169,7 @@ static Key keys[] = {
 	{ MODKEY,                GDK_KEY_g,      spawn,      SETPROP("_SURF_URI", "_SURF_GO", PROMPT_GO) },
 	{ MODKEY,                GDK_KEY_f,      spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
 	{ MODKEY,                GDK_KEY_slash,  spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
+	{ MODKEY,                GDK_KEY_Return, spawn,      SETURI("_SURF_GO") },
 	{ MODKEY,                GDK_KEY_d,      spawn,      BM_ADD("_SURF_URI") },
 
 	{ 0,                     GDK_KEY_Escape, stop,       { 0 } },
