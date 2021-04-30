@@ -7,6 +7,8 @@ static char *certdir        = "~/.surf/certificates/";
 static char *cachedir       = "~/.surf/cache/";
 static char *cookiefile     = "~/.surf/cookies.txt";
 
+static char *searchengine = "https://duckduckgo.com/?q=";
+
 /* Webkit default features */
 /* Highest priority value will be used.
  * Default parameters are priority 0
