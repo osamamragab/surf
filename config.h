@@ -89,7 +89,7 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
 
 #define SETURI(p) { \
         .v = (char *[]){ "/bin/sh", "-c", \
-             "prop=\"`surf_history_dmenu.sh`\" &&" \
+             "prop=\"$(tac ~/.config/surf/history.txt | dmenu -l 10 -b -i | cut -d ' ' -f 3)\" &&" \
              "xprop -id $1 -f $0 8s -set $0 \"$prop\"", \
              p, winid, NULL \
         } \
@@ -169,7 +169,7 @@ static Key keys[] = {
 	{ MODKEY,                GDK_KEY_g,      spawn,      SETPROP("_SURF_URI", "_SURF_GO", PROMPT_GO) },
 	{ MODKEY,                GDK_KEY_f,      spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
 	{ MODKEY,                GDK_KEY_slash,  spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
-	{ MODKEY,                GDK_KEY_Return, spawn,      SETURI("_SURF_GO") },
+	{ MODKEY,                GDK_KEY_h,      spawn,      SETURI("_SURF_GO") },
 	{ MODKEY,                GDK_KEY_d,      spawn,      BM_ADD("_SURF_URI") },
 
 	{ 0,                     GDK_KEY_Escape, stop,       { 0 } },
