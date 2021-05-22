@@ -167,19 +167,19 @@ static Key keys[] = {
 	{ 0,                     GDK_KEY_Escape, stop,       { 0 } },
 	{ MODKEY,                GDK_KEY_c,      stop,       { 0 } },
 
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_r,      reload,     { .i = 1 } },
 	{ MODKEY,                GDK_KEY_r,      reload,     { .i = 0 } },
+	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_r,      reload,     { .i = 1 } },
 
-	{ MODKEY,                GDK_KEY_l,      navigate,   { .i = +1 } },
-	{ MODKEY,                GDK_KEY_h,      navigate,   { .i = -1 } },
+	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_l,      navigate,   { .i = +1 } },
+	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_h,      navigate,   { .i = -1 } },
 
 	/* vertical and horizontal scrolling, in viewport percentage */
 	{ MODKEY,                GDK_KEY_j,      scrollv,    { .i = +10 } },
 	{ MODKEY,                GDK_KEY_k,      scrollv,    { .i = -10 } },
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_j,      scrollv,    { .i = +50 } },
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_k,      scrollv,    { .i = -50 } },
-	{ MODKEY,                GDK_KEY_l,      scrollh,    { .i = +10 } },
-	{ MODKEY,                GDK_KEY_h,      scrollh,    { .i = -10 } },
+	//{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_j,      scrollv,    { .i = +50 } },
+	//{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_k,      scrollv,    { .i = -50 } },
+	//{ MODKEY,                GDK_KEY_l,      scrollh,    { .i = +10 } },
+	//{ MODKEY,                GDK_KEY_h,      scrollh,    { .i = -10 } },
 
 	//{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_j,      zoom,       { .i = -1 } },
 	//{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_k,      zoom,       { .i = +1 } },
