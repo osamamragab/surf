@@ -7,11 +7,6 @@ static char *certdir        = "~/.surf/certificates/";
 static char *cachedir       = "~/.surf/cache/";
 static char *cookiefile     = "~/.surf/cookies.txt";
 static char *historyfile    = "~/.surf/history.txt";
-static char **plugindirs    = (char*[]){
-	"~/.surf/plugins/",
-	LIBPREFIX "/mozilla/plugins/",
-	NULL
-};
 
 static char *searchengine = "https://duckduckgo.com/?q=";
 
