@@ -1,7 +1,6 @@
 /* modifier 0 means no modifier */
 static int surfuseragent    = 1;  /* Append Surf version to default WebKit user agent */
 static char *fulluseragent  = ""; /* Or override the whole user agent string */
-
 static char *scriptfile     = "~/.config/surf/script.js";
 static char *styledir       = "~/.config/surf/styles/";
 static char *certdir        = "~/.config/surf/certificates/";
@@ -9,7 +8,7 @@ static char *cachedir       = "~/.config/surf/cache/";
 static char *cookiefile     = "~/.config/surf/cookies.txt";
 static char *historyfile    = "~/.config/surf/history.txt";
 
-static char *searchengine = "https://www.google.com/search?q=";
+static char *searchengine = "https://duckduckgo.com/?q=";
 
 /* Webkit default features */
 /* Highest priority value will be used.
