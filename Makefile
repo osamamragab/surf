@@ -55,7 +55,8 @@ dist: distclean
 install: all
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f surf $(DESTDIR)$(PREFIX)/bin
-	chmod 755 $(DESTDIR)$(PREFIX)/bin/surf
+	cp -f surf-open.sh $(DESTDIR)$(PREFIX)/bin/surf-open
+	chmod 755 $(DESTDIR)$(PREFIX)/bin/surf $(DESTDIR)$(PREFIX)/bin/surf-open
 	mkdir -p $(DESTDIR)$(LIBDIR)
 	cp -f $(WLIB) $(DESTDIR)$(LIBDIR)
 	for wlib in $(WLIB); do \
