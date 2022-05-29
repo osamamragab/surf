@@ -53,47 +53,47 @@ static Parameter defconfig[ParameterLast] = {
 };
 
 static UriParameters uriparams[] = {
-	{ "(://|\\.)suckless\\.org(/|$)", {
-	  [JavaScript] = { { .i = 0 }, 1 },
-	}, },
+	{
+		"(://|\\.)suckless\\.org(/|$)",
+		{ [JavaScript] = { { .i = 0 }, 1 }, },
+	},
 };
 
 /* default window size: width, height */
 static int winsize[] = { 800, 600 };
 
-static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
-                                    WEBKIT_FIND_OPTIONS_WRAP_AROUND;
+static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE | WEBKIT_FIND_OPTIONS_WRAP_AROUND;
 
-#define PROMPT_GO   "Go:"
-#define PROMPT_FIND "Find:"
+#define PROMPT_GO   "go:"
+#define PROMPT_FIND "find:"
 
 /* SETPROP(readprop, setprop, prompt)*/
 #define SETPROP(r, s, p) { \
-        .v = (const char *[]){ "/bin/sh", "-c", \
-             "prop=\"$(printf '%b' \"$(xprop -id $1 "r" " \
-             "| sed -e 's/^"r"(UTF8_STRING) = \"\\(.*\\)\"/\\1/' " \
-             "      -e 's/\\\\\\(.\\)/\\1/g')\" " \
-             "| dmenu -p '"p"' -w $1)\" " \
-             "&& xprop -id $1 -f "s" 8u -set "s" \"$prop\"", \
-             "surf-setprop", winid, NULL \
-        } \
+	.v = (const char *[]){ "/bin/sh", "-c", \
+		"prop=\"$(printf '%b' \"$(xprop -id $1 "r" " \
+		"| sed -e 's/^"r"(UTF8_STRING) = \"\\(.*\\)\"/\\1/' " \
+		"      -e 's/\\\\\\(.\\)/\\1/g')\" " \
+		"| dmenu -p '"p"' -w $1)\" " \
+		"&& xprop -id $1 -f "s" 8u -set "s" \"$prop\"", \
+		"surf-setprop", winid, NULL \
+	} \
 }
 
 #define SETURI(p) { \
-        .v = (char *[]){ "/bin/sh", "-c", \
-             "prop=\"$(tac ~/.config/surf/history.txt | dmenu -l 10 -b -i | cut -d ' ' -f 3)\" &&" \
-             "xprop -id $1 -f $0 8s -set $0 \"$prop\"", \
-             p, winid, NULL \
-        } \
+	.v = (char *[]){ "/bin/sh", "-c", \
+		"prop=\"$(tac ~/.config/surf/history.txt | dmenu -l 10 -b -i | cut -d ' ' -f 3)\" &&" \
+		"xprop -id $1 -f $0 8s -set $0 \"$prop\"", \
+		p, winid, NULL \
+	} \
 }
 
 /* DOWNLOAD(URI, referer) */
 #define DOWNLOAD(u, r) { \
-        .v = (const char *[]){ "st", "-e", "/bin/sh", "-c",\
-             "curl -g -L -J -O -A \"$1\" -b \"$2\" -c \"$2\"" \
-             " -e \"$3\" \"$4\"; read", \
-             "surf-download", useragent, cookiefile, r, u, NULL \
-        } \
+	.v = (const char *[]){ "st", "-e", "/bin/sh", "-c",\
+		"curl -g -L -J -O -A \"$1\" -b \"$2\" -c \"$2\"" \
+		" -e \"$3\" \"$4\"; read", \
+		"surf-download", useragent, cookiefile, r, u, NULL \
+	} \
 }
 
 /* PLUMB(URI) */
@@ -101,27 +101,35 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
  * "http://" or "https://" should be opened.
  */
 #define PLUMB(u) {\
-        .v = (const char *[]){ "/bin/sh", "-c", \
-             "xdg-open \"$0\"", u, NULL \
-        } \
+	.v = (const char *[]){ "/bin/sh", "-c", \
+		"xdg-open \"$0\"", u, NULL \
+	} \
 }
 
 /* VIDEOPLAY(URI) */
 #define VIDEOPLAY(u) {\
-        .v = (const char *[]){ "/bin/sh", "-c", \
-             "mpv --really-quiet \"$0\"", u, NULL \
-        } \
+	.v = (const char *[]){ "/bin/sh", "-c", \
+		"mpv --really-quiet \"$0\"", u, NULL \
+	} \
 }
 
 /* BM_ADD(readprop) */
 #define BM_ADD(r) {\
-        .v = (const char *[]){ "/bin/sh", "-c", \
-             "(echo $(xprop -id $0 $1) | cut -d '\"' -f2 " \
-             "| sed 's/.*https*:\\/\\/\\(www\\.\\)\\?//' && cat ~/.config/surf/bookmarks) " \
-             "| awk '!seen[$0]++' > ~/.config/surf/bookmarks.tmp && " \
-             "mv ~/.config/surf/bookmarks.tmp ~/.config/surf/bookmarks", \
-             winid, r, NULL \
-        } \
+	.v = (const char *[]){ "/bin/sh", "-c", \
+		"(echo $(xprop -id $0 $1) | cut -d '\"' -f2 " \
+		"| sed 's/.*https*:\\/\\/\\(www\\.\\)\\?//' && cat ~/.config/surf/bookmarks) " \
+		"| awk '!seen[$0]++' > ~/.config/surf/bookmarks.tmp && " \
+		"mv ~/.config/surf/bookmarks.tmp ~/.config/surf/bookmarks", \
+		winid, r, NULL \
+	} \
+}
+
+#define WATCH {\
+	.v = (char *[]){ "/bin/sh", "-c", \
+	"st -e \
+	yt $(xprop -id $0 _SURF_URI | cut -d \\\" -f 2)", \
+	winid, NULL \
+	} \
 }
 
 /* styles */
@@ -145,8 +153,8 @@ static SiteSpecific certs[] = {
 
 #define SR_SEARCH {\
 	.v = (char *[]){ "/bin/sh", "-c", \
-	"xprop -id $0 -f _SURF_GO 8s -set _SURF_GO \
-	$(sr -p $(sr -elvi | tail -n +2 | cut -s -f1 | dmenu))", winid, NULL } \
+		"xprop -id $0 -f _SURF_GO 8s -set _SURF_GO \
+		$(sr -p $(sr -elvi | tail -n +2 | cut -s -f1 | dmenu))", winid, NULL } \
 }
 
 #define MODKEY GDK_CONTROL_MASK
@@ -210,6 +218,7 @@ static Key keys[] = {
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_m,      toggle,     { .i = Style } },
 
 	{ MODKEY,                GDK_KEY_s,      spawn,      SR_SEARCH },
+	{ MODKEY,                GDK_KEY_w,      spawn,      WATCH },
 };
 
 /* button definitions */
