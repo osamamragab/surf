@@ -220,7 +220,8 @@ static Key keys[] = {
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_d,      toggle,     { .i = DarkMode } },
 
 	{ MODKEY,                GDK_KEY_s,      spawn,      SR_SEARCH },
-	{ MODKEY,                GDK_KEY_w,      spawn,      WATCH },
+	{ MODKEY,                GDK_KEY_w,      playexternal, { 0 } },
+	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_w,      spawn,      WATCH },
 };
 
 /* button definitions */
