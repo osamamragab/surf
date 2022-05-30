@@ -125,14 +125,6 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE | WEBKI
 	} \
 }
 
-#define WATCH {\
-	.v = (char *[]){ "/bin/sh", "-c", \
-	"st -e \
-	yt $(xprop -id $0 _SURF_URI | cut -d \\\" -f 2)", \
-	winid, NULL \
-	} \
-}
-
 /* styles */
 /*
  * The iteration will stop at the first match, beginning at the beginning of
@@ -221,7 +213,6 @@ static Key keys[] = {
 
 	{ MODKEY,                GDK_KEY_s,      spawn,      SR_SEARCH },
 	{ MODKEY,                GDK_KEY_w,      playexternal, { 0 } },
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_w,      spawn,      WATCH },
 };
 
 /* button definitions */
