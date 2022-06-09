@@ -1,12 +1,15 @@
+#define SURF_HOME "~/.config/surf"
+
+
 /* modifier 0 means no modifier */
 static int surfuseragent    = 1;  /* Append Surf version to default WebKit user agent */
 static char *fulluseragent  = ""; /* Or override the whole user agent string */
-static char *scriptfile     = "~/.config/surf/script.js";
-static char *styledir       = "~/.config/surf/styles/";
-static char *certdir        = "~/.config/surf/certificates/";
-static char *cachedir       = "~/.config/surf/cache/";
-static char *cookiefile     = "~/.config/surf/cookies.txt";
-static char *historyfile    = "~/.config/surf/history.txt";
+static char *scriptfile     = SURF_HOME"/script.js";
+static char *styledir       = SURF_HOME"/styles/";
+static char *certdir        = SURF_HOME"/certificates/";
+static char *cachedir       = SURF_HOME"/cache/";
+static char *cookiefile     = SURF_HOME"/cookies.txt";
+static char *historyfile    = SURF_HOME"/history.txt";
 
 static char *searchengine = "https://duckduckgo.com/?q=";
 
@@ -213,6 +216,8 @@ static Key keys[] = {
 
 	{ MODKEY,                GDK_KEY_s,      spawn,      SR_SEARCH },
 	{ MODKEY,                GDK_KEY_w,      playexternal, { 0 } },
+
+	{ MODKEY,                GDK_KEY_i,      spawn,      { .v = (char *[]){ "/bin/sh", "-c", "curl -s -d username=\"$(cat "SURF_HOME"/instapaper | sed -n '1p')\" -d password=\"$(cat "SURF_HOME"/instapaper | sed -n '2p')\" -d url=\"$(xprop -id $0 _SURF_URI | cut -d '\"' -f 2)\" https://www.instapaper.com/api/add >/dev/null", winid, NULL } } },
 };
 
 /* button definitions */
