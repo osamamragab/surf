@@ -1,6 +1,5 @@
 #define SURF_HOME "~/.config/surf"
 
-
 /* modifier 0 means no modifier */
 static int surfuseragent    = 1;  /* Append Surf version to default WebKit user agent */
 static char *fulluseragent  = ""; /* Or override the whole user agent string */
@@ -10,6 +9,7 @@ static char *certdir        = SURF_HOME"/certificates/";
 static char *cachedir       = SURF_HOME"/cache/";
 static char *cookiefile     = SURF_HOME"/cookies.txt";
 static char *historyfile    = SURF_HOME"/history.txt";
+static char *scriptdir      = SURF_HOME"/scripts/";
 
 static char *searchengine = "https://duckduckgo.com/?q=";
 
@@ -145,6 +145,15 @@ static SiteSpecific styles[] = {
 static SiteSpecific certs[] = {
 	/* regexp               file in $certdir */
 	{ "://suckless\\.org/", "suckless.org.crt" },
+};
+
+/* scripts */
+/*
+ * Run scripts on certain URLs, will inject more than one script
+ */
+static SiteSpecific scripts[] = {
+    /* regexp                script in $scriptdir */
+    { "://192.168.1.1",      "wifi.js" },
 };
 
 #define SR_SEARCH {\
