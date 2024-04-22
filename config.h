@@ -225,8 +225,6 @@ static Key keys[] = {
 
 	{ MODKEY,                GDK_KEY_s,      spawn,      SR_SEARCH },
 	{ MODKEY,                GDK_KEY_w,      playexternal, { 0 } },
-
-	{ MODKEY,                GDK_KEY_i,      spawn,      { .v = (char *[]){ "/bin/sh", "-c", "curl -s -d username=\"$(cat "SURF_HOME"/instapaper | sed -n '1p')\" -d password=\"$(cat "SURF_HOME"/instapaper | sed -n '2p')\" -d url=\"$(xprop -id $0 _SURF_URI | cut -d '\"' -f 2)\" https://www.instapaper.com/api/add >/dev/null", winid, NULL } } },
 };
 
 /* button definitions */
